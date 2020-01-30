@@ -1,15 +1,21 @@
 import 'dart:convert';
+import 'package:angel_container_generator/angel_container_generator.dart';
 import "package:http/http.dart" as http;
 
+
+@contained
 class Request {
-  static http.Client _client = http.Client();
-  static http.Client client = _client;
+  
 
-  static reset() {
-    client = _client;
-  }
+  http.Client client;
 
-  static Future<http.Response> put(String url,
+  Request(this.client);
+
+
+
+
+
+  Future<http.Response> put(String url,
       {Map<String, String> headers, dynamic body, Encoding encoding}) async {
     headers = headers ?? {};
     headers.putIfAbsent("content-type", () => "application/json");
@@ -18,7 +24,7 @@ class Request {
     return res;
   }
 
-  static Future<http.Response> post(String url,
+  Future<http.Response> post(String url,
       {Map<String, String> headers, dynamic body, Encoding encoding}) async {
     headers = headers ?? {};
     headers.putIfAbsent("content-type", () => "application/json");

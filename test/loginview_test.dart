@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mobile_app/container.dart';
 import 'package:mobile_app/controller/login.dart';
 import 'package:mobile_app/screen/loginView.dart';
 
@@ -15,7 +16,7 @@ void main() {
     LoginController loginController;
 
     reset() {
-      loginController = LoginController();
+      loginController = container.make<LoginController>();
     }
 
     Widget make() {

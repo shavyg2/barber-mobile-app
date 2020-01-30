@@ -2,9 +2,10 @@
 
 
 
+import 'package:angel_container_generator/angel_container_generator.dart';
 import 'package:mobile_app/api/endpoint/endpoint.dart';
 
-
+@contained
 class Api{
 
   String _url;

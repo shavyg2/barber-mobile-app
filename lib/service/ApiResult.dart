@@ -12,6 +12,10 @@ abstract class ApiResult{
 
 
   bool get isGood{
+    if(response==null){
+      return false;
+    }
+
     return response.statusCode <300 && response.statusCode >=200;
   }
 

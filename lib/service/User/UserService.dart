@@ -1,27 +1,31 @@
 part of service;
 
-
+@contained
 class UserService{
 
   Api _api;
-  UserService(Api api){
+  Client client;
+  UserService(Api api,this.client){
     _api = api;
   }
 
-  static UserService _instance;
-  factory UserService.instance(){
-    return _instance = _instance ?? UserService(Api.instance());
-  }
+
 
   Future<SignupResult> signup (dynamic signup) async {
-    final res = await Request.put(_api.endpoint(["/api/user/signup"]),body:signup );
+    final res = await client.put(_api.endpoint(["/api/user/signup"]),body:signup );
     return SignupResult(res,await jsonParser(res.body));
   }
 
-  Future<LoginResult> login(dynamic login)async {
-    final res = await Request.post(_api.endpoint(["/api/user/login"]),body: login);
-    var json = await jsonParser(res.body!=null && res.body.isNotEmpty?res.body:"{}");
-        return LoginResult(res,json);
+  Future<JsonApi<LoginResponse>> login(dynamic login)async {
+
+    final result = await JsonApi.post<LoginResponse>(
+      url:_api.endpoint(["/api/user/login"]),
+      body: login,
+      serialize: (t)=>LoginResponseSerializer.fromMap(t),
+    );
+
+    return result;
+
   }
 }
 

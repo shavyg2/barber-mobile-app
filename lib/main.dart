@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/container.dart';
+import 'package:mobile_app/page/pages.dart';
+import 'package:mobile_app/screen/loginView.dart';
 
-void main() => runApp(MyApp());
+void main() {
+
+  setContainer(container);
+  initContainer();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -20,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: getPage().login(),
     );
   }
 }
